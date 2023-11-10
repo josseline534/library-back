@@ -1,0 +1,9 @@
+# Ignora la carpeta node_modules
+node_modules/
+
+# Ignora archivos de construcción
+build/
+
+# Ignora archivos de prueba
+**/*.test.js
+**/*.spec.js
