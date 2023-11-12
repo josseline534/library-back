@@ -3,6 +3,12 @@ const Joi = require('joi')
 
 const checkType = ['body', 'query', 'params']
 
+/**
+ *
+ * @param {object} schema
+ * @param {string} check 'body' | 'query' | 'params'
+ * @returns
+ */
 module.exports.SchemaValidator =
   (schema, check = 'body') =>
     (req, _res, next) => {
@@ -21,7 +27,7 @@ module.exports.SchemaValidator =
             req[check] = value
             next()
           }
-        } else throw Boom.badRequest()
+        } else Boom.badRequest()
       } catch (error) {
         next(error)
       }
