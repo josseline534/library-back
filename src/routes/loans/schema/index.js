@@ -6,5 +6,5 @@ module.exports.LoansSchema = Joi.object().keys({
 })
 
 module.exports.ReturnSchema = Joi.object().keys({
-  returnDate: Joi.date().required()
+  returnAt: Joi.date()
 })

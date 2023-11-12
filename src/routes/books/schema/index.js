@@ -2,9 +2,9 @@ const Joi = require('joi')
 const book = {
   title: Joi.string(),
   authorId: Joi.number(),
-  description: Joi.string().alphanum(),
+  description: Joi.string(),
   isbn: Joi.string(),
-  datePost: Joi.date(),
+  postAt: Joi.date(),
   stock: Joi.number()
 }
 module.exports.BookCreateSchema = Joi.object().keys({
@@ -12,7 +12,7 @@ module.exports.BookCreateSchema = Joi.object().keys({
   authorId: book.authorId.required(),
   description: book.description,
   isbn: book.isbn.required(),
-  datePost: book.datePost,
+  postAt: book.postAt,
   stock: book.stock.required()
 })
 
