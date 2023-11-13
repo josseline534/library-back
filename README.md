@@ -8,8 +8,11 @@ Para realizar las migraciones
 - migrations:generate
 - migrations:run
 
+Se debe crear el archivo `.env` tal como esta en el ejemplo `.env.example`
+
 Para levantar el proyecto
+- npm i
+- docker-compose up --d
 - npm run dev
 - npm run start
 
-Se debe crear el archivo `.env` tal como esta en el ejemplo `.env.example`
