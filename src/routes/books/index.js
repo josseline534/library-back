@@ -1,4 +1,4 @@
-const { SchemaValidator } = require('../../middlewares')
+const { SchemaValidator, AuthorizerToken } = require('../../middlewares')
 const { CreateBook } = require('./create')
 const { ListBooks } = require('./getList')
 const { DetailBook } = require('./getDetails')
@@ -12,15 +12,15 @@ const PATH = '/books'
 module.exports.BooksRoutes = (router) => {
   router
     .route(`${PATH}`)
-    .get([SchemaValidator(PageSchema, 'query')], ListBooks)
-    .post([SchemaValidator(BookCreateSchema)], CreateBook)
+    .get([AuthorizerToken, SchemaValidator(PageSchema, 'query')], ListBooks)
+    .post([AuthorizerToken, SchemaValidator(BookCreateSchema)], CreateBook)
 
   router
     .route(`${PATH}/:id`)
-    .get([SchemaValidator(IdSchema, 'params')], DetailBook)
+    .get([AuthorizerToken, SchemaValidator(IdSchema, 'params')], DetailBook)
     .put(
-      [SchemaValidator(IdSchema, 'params'), SchemaValidator(BookEditSchema)],
+      [AuthorizerToken, SchemaValidator(IdSchema, 'params'), SchemaValidator(BookEditSchema)],
       EditBook
     )
-    .delete([], DeleteBook)
+    .delete([AuthorizerToken, SchemaValidator(IdSchema, 'params')], DeleteBook)
 }

@@ -1,4 +1,4 @@
-const { SchemaValidator } = require('../../middlewares')
+const { SchemaValidator, AuthorizerToken } = require('../../middlewares')
 const { ListUsers } = require('./list')
 const { UserSchema } = require('./schema')
 const { CreateUser } = require('./create')
@@ -9,6 +9,6 @@ const PATH = '/users'
 module.exports.UsersRoutes = (router) => {
   router
     .route(`${PATH}`)
-    .get([SchemaValidator(PageSchema, 'query')], ListUsers)
-    .post([SchemaValidator(UserSchema)], CreateUser)
+    .get([AuthorizerToken, SchemaValidator(PageSchema, 'query')], ListUsers)
+    .post([AuthorizerToken, SchemaValidator(UserSchema)], CreateUser)
 }

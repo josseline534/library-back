@@ -1,4 +1,5 @@
 const Boom = require('@hapi/boom')
+const AdminService = require('../services/Admin')
 // const { AuthorizerController } = require('../controller/AuthorizerController')
 
 module.exports.AuthorizerToken = async (req, res, next) => {
@@ -8,7 +9,8 @@ module.exports.AuthorizerToken = async (req, res, next) => {
     if (!token) {
       next(Boom.unauthorized())
     }
-    // req.user = await AuthorizerController.verifyToken(token)
+    const adminService = new AdminService()
+    req.user = await adminService.verifyToken(token)
     next()
   } catch (error) {
     next(error)

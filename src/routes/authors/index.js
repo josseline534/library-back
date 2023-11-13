@@ -1,4 +1,4 @@
-const { SchemaValidator } = require('../../middlewares')
+const { SchemaValidator, AuthorizerToken } = require('../../middlewares')
 const { AddAuthor } = require('./add')
 const { ListAuthors } = require('./list')
 const { ListBookByAuthor } = require('./listBook')
@@ -10,10 +10,10 @@ const PATH = '/authors'
 module.exports.AuthorsRoutes = (router) => {
   router
     .route(`${PATH}`)
-    .get([SchemaValidator(PageSchema, 'query')], ListAuthors)
-    .post([SchemaValidator(AuthorSchema)], AddAuthor)
+    .get([AuthorizerToken, SchemaValidator(PageSchema, 'query')], ListAuthors)
+    .post([AuthorizerToken, SchemaValidator(AuthorSchema)], AddAuthor)
 
   router
     .route(`${PATH}/:id`)
-    .get([SchemaValidator(IdSchema, 'params')], ListBookByAuthor)
+    .get([AuthorizerToken, SchemaValidator(IdSchema, 'params')], ListBookByAuthor)
 }
